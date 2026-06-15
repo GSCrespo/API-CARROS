@@ -52,7 +52,7 @@ public class UsuarioServlet extends HttpServlet {
                 break;
 
             default:
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("index.html");
         }
     }
 

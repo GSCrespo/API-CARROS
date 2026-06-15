@@ -90,7 +90,7 @@ public class CarroServlet extends HttpServlet {
                 }
                 request.setAttribute("listaCarros", listaCarros);
                 request.setAttribute("lancamentos",listaLancamento);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
+                request.getRequestDispatcher("index.html").forward(request, response);
                 break;
 
             case "detalhes":
