@@ -40,7 +40,7 @@ public class UsuarioServlet extends HttpServlet {
 
             case "novo":
 
-                request.getRequestDispatcher("/WEB-INF/cadastroUsuario.jsp")
+                request.getRequestDispatcher("/WEB-INF/cadastroUsuario.html")
                         .forward(request, response);
                 break;
 
@@ -99,7 +99,7 @@ public class UsuarioServlet extends HttpServlet {
         //  Se tiver erro
         if (!erros.isEmpty()) {
             request.setAttribute("erros", erros);
-            request.getRequestDispatcher("/WEB-INF/cadastroUsuario.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/cadastroUsuario.html").forward(request, response);
             return;
         }
 
@@ -112,7 +112,7 @@ public class UsuarioServlet extends HttpServlet {
                                                                  caso seja o proprio usuario a se cadastrar ele vai para p login direto */
             response.sendRedirect("carro?action=home");
         } else{
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login.html");
         }
     }
 

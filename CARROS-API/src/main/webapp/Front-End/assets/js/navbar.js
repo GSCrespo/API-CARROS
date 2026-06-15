@@ -6,17 +6,10 @@
     const formBusca = document.getElementById("form-busca");
 
     if (navLinks) {
-        if (usuario) {
-            navLinks.innerHTML = `
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre o Sistema</a></li>
-            `;
-        } else {
-            navLinks.innerHTML = `
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre o Sistema</a></li>
-            `;
-        }
+        navLinks.innerHTML = `
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre o Sistema</a></li>
+        `;
     }
 
     if (navActions) {
@@ -27,11 +20,18 @@
                 <button class="btn btn-outline-light btn-sm" id="btn-logout">Logout</button>
             `;
 
-            document.getElementById("btn-logout")?.addEventListener("click", async () => {
-                await fetch("http://localhost:8080/logout", { method: "POST" });
+            document.getElementById("btn-logout").addEventListener("click", async () => {
+                const BASE_URL = "http://localhost:8080";
+                const USE_MOCK = true;
+
+                if (!USE_MOCK) {
+                    await fetch(`${BASE_URL}/logout`, { method: "POST" });
+                }
+
                 sessionStorage.removeItem("usuario");
                 window.location.href = "login.html";
             });
+
         } else {
             navActions.innerHTML = `
                 <a class="btn btn-outline-light btn-sm" href="login.html">Login</a>
