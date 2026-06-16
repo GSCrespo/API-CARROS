@@ -19,7 +19,7 @@ public class AvaliacaoServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         double nota = Double.parseDouble(request.getParameter("avaliacao"));
 
-        Carro carro = CarroServlet.buscarPorIdStatic(id);
+        Carro carro = CadastrarServlet.buscarPorIdStatic(id);
 
         if (carro != null) {
             if (nota >= 0 && nota <= 5) {

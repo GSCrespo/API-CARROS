@@ -1,6 +1,8 @@
 package br.edu.ifsp.model;
 
-public class Carro {
+import java.io.Serializable;
+
+public class Carro implements Serializable{
 
     private int id;
     private String marca;
@@ -90,7 +92,7 @@ public class Carro {
     }
 
     public void setId(int id) {
-    this.id = id;
+        this.id = id;
     }
 
     public void setMarca(String marca) {

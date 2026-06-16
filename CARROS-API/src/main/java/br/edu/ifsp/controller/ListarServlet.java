@@ -24,11 +24,16 @@ public class ListarServlet extends HttpServlet {
 
         @Override
         public void init() throws ServletException {
-
             super.init();
-            CarroDAO dao = new CarroJSONDAO(getServletContext().getRealPath("/"));
-            getServletContext().setAttribute("dao", dao);
 
+            CarroDAO dao =
+                new CarroJSONDAO(
+                    getServletContext()
+                    .getRealPath("/")
+                );
+
+            getServletContext()
+                .setAttribute("dao",dao);
         }
 
         @Override
