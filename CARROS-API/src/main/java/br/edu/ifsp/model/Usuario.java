@@ -1,15 +1,30 @@
 package br.edu.ifsp.model;
 
-public class Usuario{
+import java.io.Serializable;
 
+public class Usuario implements Serializable{
+
+    private int id;
     private String userName;
-    private String tipo;
     private String senha;
+    private Boolean isAdmin;
 
-    public Usuario(String userName, String senha, String tipo){
+    public Usuario(){
+        this.isAdmin = false;
+    }
+
+    public Usuario(String userName, String senha,Boolean admin){
+        this();
         this.userName = userName;
         this.senha = senha;
-        this.tipo = tipo;
+        isAdmin = admin;
+    }
+
+    public Usuario(int id,String userName, String senha, Boolean admin){
+        this.id = id;
+        this.userName = userName;
+        this.senha = senha;
+        this.isAdmin = admin;
     }
 
     //GETTERS
@@ -17,25 +32,32 @@ public class Usuario{
         return userName;
     }
 
-    public String getTipo() {
-        return tipo;
+    public Boolean getIsAdmin() {
+        return isAdmin;
     }
 
     public String getSenha() {
         return senha;
     }
+    public int getId() {
+        return id;
+    }
 
-    //SETTERS
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setIsAdmin(Boolean admin) {
+        this.isAdmin = admin;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Override
+    public String toString(){
+        return this.userName + ";" + this.isAdmin+";"+this.id;
     }
 
 }

@@ -11,15 +11,27 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/Sair")
 public class LogoutServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+     @Override
+    protected void doPost(HttpServletRequest request,HttpServletResponse response)
             throws IOException {
 
-        HttpSession session = request.getSession(false);
+        HttpSession session =
+                request.getSession(false);
 
-        if (session != null) {
-            session.invalidate(); // ACABA A SESSÃO
+        if(session != null){
+            session.invalidate();
         }
 
-        response.sendRedirect(request.getContextPath() + "/carro?action=home"); // volta pra home
+        response.setContentType(
+                "application/json"
+        );
+
+        response.setCharacterEncoding(
+                "UTF-8"
+        );
+
+        response.getWriter().write(
+                "{\"sucesso\":true}"
+        );
     }
 }

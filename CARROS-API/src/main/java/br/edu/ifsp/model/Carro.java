@@ -1,7 +1,6 @@
 package br.edu.ifsp.model;
 
 public class Carro {
-    private static int id_atual = 1;
 
     private int id;
     private String marca;
@@ -15,13 +14,9 @@ public class Carro {
     private double valor;
     private int totalAvaliacao;
     private double somaAvaliacao;
-    
-
-
-    //construtor parcial
 
     public Carro() {
-        this.id = id_atual++;
+        
     }
 
     //construtor completo
@@ -44,8 +39,6 @@ public class Carro {
         if (totalAvaliacao == 0) return 0;
         return somaAvaliacao / totalAvaliacao;
     }
-
-    //getters
 
 
     public int getId() {
@@ -96,8 +89,9 @@ public class Carro {
         return somaAvaliacao;
     }
 
-
-    //setters
+    public void setId(int id) {
+    this.id = id;
+    }
 
     public void setMarca(String marca) {
         this.marca = marca;
