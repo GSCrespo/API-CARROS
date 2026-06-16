@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login — CRUD Carros</title>
+    <title>Acesso Negado — CRUD Carros</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
@@ -31,43 +31,28 @@
     </div>
 </nav>
 
-<div class="container d-flex justify-content-center align-items-center flex-grow-1">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+<div class="container flex-grow-1 mt-5 text-center">
 
-        <h2 class="text-center mb-4">Login</h2>
+    <div class="card shadow-lg p-4">
+        <h1 class="text-danger mb-3">Acesso Negado</h1>
 
-        <!-- Mensagem de erro -->
-        <div id="erro" class="alert alert-danger text-center d-none"></div>
+        <p class="mb-4">
+            Você não tem permissão para acessar esta página.
+        </p>
 
-        <!-- Mensagem vinda de redirecionamento 401 -->
-        <div id="msg-401" class="alert alert-warning text-center d-none">
-            Sessão expirada. Faça login novamente.
-        </div>
+        <p class="text-muted" id="mensagem-erro"></p>
 
-        <div class="mb-3">
-            <label class="form-label">Usuário</label>
-            <input type="text" id="username" class="form-control" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Senha</label>
-            <input type="password" id="senha" class="form-control" required>
-        </div>
-
-        <div class="d-grid gap-2 mt-3">
-            <button class="btn btn-success" id="btn-login">Entrar</button>
-            <a href="cadastroUsuario.html" class="btn btn-outline-primary">Cadastre-se</a>
-        </div>
-
+        <a href="index.html" class="btn btn-primary mt-3">
+            Voltar para Home
+        </a>
     </div>
+
 </div>
 
 <footer class="bg-dark text-light mt-auto p-4">
     <div class="container">
         <h4>Sobre o projeto</h4>
-        <p>
-            Esse é um mini projeto desenvolvido para a disciplina de Desenvolvimento de Sistemas Web 1 (DSW 1).
-        </p>
+        <p>Esse é um mini projeto desenvolvido para a disciplina de Desenvolvimento de Sistemas Web 1 (DSW 1).</p>
     </div>
 </footer>
 
@@ -75,7 +60,14 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 <script src="assets/js/navbar.js"></script>
-<script src="assets/js/login.js"></script>
+<script>
+    // Mensagem opcional vinda via query string: error.html?msg=...
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    if (msg) {
+        document.getElementById("mensagem-erro").textContent = msg;
+    }
+</script>
 
 </body>
 </html>

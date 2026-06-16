@@ -1,4 +1,4 @@
-const BASE_URL = "";
+const BASE_URL = "http://localhost:8080";
 const USE_MOCK = true;
 
 const carrosMock = [
@@ -63,7 +63,7 @@ async function init() {
     const imagem = document.getElementById("carro-imagem");
     imagem.src = carro.imagem
         ? `${BASE_URL}/uploads/${carro.imagem}`
-        : "https://via.placeholder.com/400x300?text=Sem+foto";
+        : "https://placehold.co/400x300?text=Sem+foto";
 
     // Botões condicionais
     if (isAutenticado()) {

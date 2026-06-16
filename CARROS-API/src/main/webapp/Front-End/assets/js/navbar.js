@@ -15,7 +15,7 @@
     if (navActions) {
         if (usuario) {
             navActions.innerHTML = `
-                <a class="btn btn-success btn-sm" href="cadastrar.html">Adicionar Carro</a>
+                <a class="btn btn-success btn-sm" href="cadastroCarro.html">Adicionar Carro</a>
                 <a class="btn btn-warning btn-sm" href="listar.html">Meus Carros</a>
                 <button class="btn btn-outline-light btn-sm" id="btn-logout">Logout</button>
             `;

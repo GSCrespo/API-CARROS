@@ -23,7 +23,7 @@ async function listarCarros() {
 function imagemCarro(carro) {
     return carro.imagem
         ? `${BASE_URL}/uploads/${carro.imagem}`
-        : "https://via.placeholder.com/300x200?text=Sem+foto";
+        : "https://placehold.co/300x200?text=Sem+foto";
 }
 
 function avaliacaoTexto(media) {

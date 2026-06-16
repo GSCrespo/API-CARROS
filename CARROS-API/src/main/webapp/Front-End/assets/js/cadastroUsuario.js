@@ -3,7 +3,7 @@ const USE_MOCK = true;
 
 // Se o usuário logado for ADMIN, adiciona a opção ADMIN no select
 const usuario = JSON.parse(sessionStorage.getItem("usuario") || "null");
-if (usuario && usuario.tipo === "ADMIN") {
+if (usuario && usuario.isAdmin) {
     const select = document.getElementById("tipo");
     const optionAdmin = document.createElement("option");
     optionAdmin.value = "ADMIN";
@@ -28,17 +28,20 @@ function mostrarSucesso(mensagem) {
 
 function validarCampos(dados) {
     const erros = [];
-    if (!dados.username) erros.push("Preencha o nome de usuário.");
-    if (!dados.senha)    erros.push("Preencha a senha.");
-    if (!dados.tipo)     erros.push("Selecione o tipo de usuário.");
+    if (!dados.userName)        erros.push("Preencha o nome de usuário.");
+    if (!dados.senha)           erros.push("Preencha a senha.");
+    if (!dados.tipo)            erros.push("Selecione o tipo de usuário.");
+    if (dados.senha.length < 5) erros.push("A senha deve ter pelo menos 5 caracteres.");
     return erros;
 }
 
 document.getElementById("btn-cadastrar").addEventListener("click", async () => {
+    const tipo = document.getElementById("tipo").value;
+
     const dados = {
-        username: document.getElementById("username").value.trim(),
+        userName: document.getElementById("username").value.trim(),
         senha:    document.getElementById("senha").value.trim(),
-        tipo:     document.getElementById("tipo").value
+        tipo:     tipo
     };
 
     const erros = validarCampos(dados);
@@ -54,10 +57,14 @@ document.getElementById("btn-cadastrar").addEventListener("click", async () => {
     }
 
     try {
-        const res = await fetch(`${BASE_URL}/cadastrarUsuario`, {
+        const res = await fetch(`${BASE_URL}/cadastrar_usuario`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(dados)
+            body: JSON.stringify({
+                userName: dados.userName,
+                senha:    dados.senha,
+                isAdmin:  tipo === "ADMIN"
+            })
         });
 
         const data = await res.json();
