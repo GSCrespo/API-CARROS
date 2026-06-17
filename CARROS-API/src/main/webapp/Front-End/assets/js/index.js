@@ -1,5 +1,5 @@
-const BASE_URL = "";
-const USE_MOCK = true;
+const BASE_URL = "http://localhost:8080/CRUDCarros";
+const USE_MOCK = false;
 
 const carrosMock = [
     { id: 1, marca: "Volkswagen", modelo: "Fusca",  ano: 1980, cor: "Vermelho",        combustivel: "Gasolina", valor: 11000, mediaAvaliacao: 4.5, imagem: "" },

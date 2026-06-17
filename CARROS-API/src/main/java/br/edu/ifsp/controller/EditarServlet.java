@@ -1,8 +1,7 @@
 package br.edu.ifsp.controller;
 
-import br.edu.ifsp.dao.UsuarioDAO;
-import br.edu.ifsp.dao.UsuarioJSONDAO;
-import br.edu.ifsp.model.Usuario;
+import br.edu.ifsp.dao.CarroDAO;
+import br.edu.ifsp.model.Carro;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -18,10 +17,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "EditarServlet", value = "/editar")
+@WebServlet("/editar")
 public class EditarServlet extends HttpServlet {
 
     private final Gson gson = new Gson();
+
+    @Override
+    protected void doOptions(HttpServletRequest req,
+                             HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setHeader("Access-Control-Allow-Methods",
+                "POST, GET, OPTIONS, DELETE");
+
+        response.setStatus(HttpServletResponse.SC_OK);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -29,91 +41,58 @@ public class EditarServlet extends HttpServlet {
             throws ServletException, IOException {
 
         response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+        response.setHeader("Access-Control-Allow-Methods",
+                "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Allow-Headers",
+                "Content-Type");
 
-        String username = null;
-        String senha = null;
-        Boolean admin = false;
+        StringBuilder sb = new StringBuilder();
 
-        String contentType = request.getContentType();
+        BufferedReader br = request.getReader();
 
-        if(contentType != null &&
-                contentType.contains("application/json")){
+        String linha;
 
-            StringBuilder sb = new StringBuilder();
-
-            BufferedReader br = request.getReader();
-
-            String linha;
-
-            while((linha = br.readLine()) != null){
-                sb.append(linha);
-            }
-
-            Usuario usuario =
-                    gson.fromJson(sb.toString(),
-                            Usuario.class);
-
-            username = usuario.getUserName();
-            senha = usuario.getSenha();
-            admin = usuario.getIsAdmin();
-
-        }else{
-
-            username = request.getParameter("username");
-            senha = request.getParameter("senha");
-
-            String tipo =
-                    request.getParameter("tipo");
-
-            admin =
-                    "ADMIN".equals(tipo);
+        while ((linha = br.readLine()) != null) {
+            sb.append(linha);
         }
 
-        List<String> listaMensagens =
-                new ArrayList<>();
+        Carro carro = gson.fromJson(
+                sb.toString(),
+                Carro.class
+        );
 
-        if(username == null ||
-                username.isEmpty()){
+        List<String> erros = new ArrayList<>();
 
-            listaMensagens.add(
-                    "O campo username deve ser preenchido"
-            );
+        if (carro.getId() <= 0) {
+            erros.add("Id inválido");
         }
 
-        if(senha == null ||
-                senha.length() < 5){
-
-            listaMensagens.add(
-                    "A senha deve possuir pelo menos 5 caracteres"
-            );
+        if (carro.getMarca() == null ||
+                carro.getMarca().isEmpty()) {
+            erros.add("Marca obrigatória");
         }
 
-        UsuarioDAO dao =
-                new UsuarioJSONDAO(
-                        getServletContext()
-                                .getRealPath("/")
-                );
-
-        if(username != null &&
-                dao.buscarPorLogin(username)
-                        != null){
-
-            listaMensagens.add(
-                    "Usuário já cadastrado"
-            );
+        if (carro.getModelo() == null ||
+                carro.getModelo().isEmpty()) {
+            erros.add("Modelo obrigatório");
         }
 
-        Map<String,Object> mensagem =
+        if (carro.getAno() <= 0) {
+            erros.add("Ano inválido");
+        }
+
+        if (carro.getDescricao() == null ||
+                carro.getDescricao().isEmpty()) {
+            erros.add("Descrição obrigatória");
+        }
+
+        Map<String, Object> mensagem =
                 new HashMap<>();
 
-        if(!listaMensagens.isEmpty()){
+        if (!erros.isEmpty()) {
 
             response.setStatus(
-                    HttpServletResponse
-                            .SC_BAD_REQUEST
-            );
+                    HttpServletResponse.SC_BAD_REQUEST);
 
             mensagem.put(
                     "mensagem",
@@ -122,35 +101,44 @@ public class EditarServlet extends HttpServlet {
 
             mensagem.put(
                     "problemas",
-                    listaMensagens
+                    erros
             );
 
-        }else{
+        } else {
 
-            dao.inserir(
-                    username,
-                    senha,
-                    admin
-            );
+            CarroDAO dao =
+                    (CarroDAO) getServletContext()
+                            .getAttribute("dao");
 
-            response.setStatus(
-                    HttpServletResponse
-                            .SC_OK
-            );
+            Carro atualizado =
+                    dao.atualizar(carro);
 
-            mensagem.put(
-                    "mensagem",
-                    "Usuário cadastrado com sucesso"
-            );
+            if (atualizado == null) {
+
+                response.setStatus(
+                        HttpServletResponse.SC_NOT_FOUND
+                );
+
+                mensagem.put(
+                        "mensagem",
+                        "Carro não encontrado"
+                );
+
+            } else {
+
+                response.setStatus(
+                        HttpServletResponse.SC_OK
+                );
+
+                mensagem.put(
+                        "mensagem",
+                        "Carro atualizado com sucesso"
+                );
+            }
         }
 
-        response.setContentType(
-                "application/json"
-        );
-
-        response.setCharacterEncoding(
-                "UTF-8"
-        );
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         PrintWriter pw =
                 response.getWriter();

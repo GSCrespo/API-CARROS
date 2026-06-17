@@ -1,5 +1,5 @@
-const BASE_URL = "";
-const USE_MOCK = true;
+const BASE_URL = "http://localhost:8080/CRUDCarros";
+const USE_MOCK = false;
 
 // Se o usuário logado for ADMIN, adiciona a opção ADMIN no select
 const usuario = JSON.parse(sessionStorage.getItem("usuario") || "null");

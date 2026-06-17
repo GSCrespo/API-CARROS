@@ -1,5 +1,5 @@
-const BASE_URL = "";
-const USE_MOCK = true;
+const BASE_URL = "http://localhost:8080/CRUDCarros";
+const USE_MOCK = false;
 
 // Mostra aviso se veio de um redirecionamento 401
 const params = new URLSearchParams(window.location.search);

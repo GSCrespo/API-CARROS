@@ -1,5 +1,5 @@
-const BASE_URL = "";
-const USE_MOCK = true;
+const BASE_URL = "http://localhost:8080/CRUDCarros";
+const USE_MOCK = false;
 
 // Protege a página: precisa estar logado
 if (!sessionStorage.getItem("usuario")) {
