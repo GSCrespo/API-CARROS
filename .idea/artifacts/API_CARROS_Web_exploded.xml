@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="API-CARROS:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/API_CARROS_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="API-CARROS/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="API-CARROS" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

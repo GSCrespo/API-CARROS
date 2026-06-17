@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre — CRUD Carros</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/global.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">CRUD Carros</a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto" id="nav-links"></ul>
+            <div class="d-flex gap-2 me-3" id="nav-actions"></div>
+            <form class="d-flex" id="form-busca">
+                <input class="form-control me-2" type="search"
+                       placeholder="Buscar carro..." id="input-busca">
+                <button class="btn btn-outline-light" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container flex-grow-1 mt-5">
+
+    <div class="card shadow-lg p-4">
+
+        <h2 class="mb-4">Sobre o Sistema</h2>
+
+        <p>
+            Esse é um projeto desenvolvido para a disciplina de Desenvolvimento de Sistemas Web 1 (DSW 1),
+            evoluindo um CRUD básico de carros para uma arquitetura mais robusta, separando claramente
+            front-end e back-end.
+        </p>
+
+        <p>
+            O <strong>backend</strong> é uma aplicação Java empacotada como WAR, organizada em camadas
+            seguindo o padrão MVC: modelos de entidade (<code>Carro</code>, <code>Usuario</code>),
+            DAOs responsáveis pela persistência em arquivo, e Servlets que expõem endpoints REST
+            retornando dados em JSON.
+        </p>
+
+        <p>
+            O <strong>frontend</strong>, por sua vez, é composto apenas por páginas HTML e arquivos
+            JavaScript puros, sem nenhuma dependência de JSP ou código Java. Toda comunicação com o
+            servidor é feita de forma assíncrona através da <strong>Fetch API</strong>, sem a necessidade
+            de recarregar a página a cada operação.
+        </p>
+
+        <p>
+            O sistema permite cadastrar, listar, visualizar, editar, excluir e avaliar carros. Algumas
+            ações — como adicionar, editar e remover registros — exigem que o usuário esteja autenticado,
+            com o controle de sessão sendo gerenciado tanto no servidor (via <code>HttpSession</code>)
+            quanto no navegador (via <code>sessionStorage</code>).
+        </p>
+
+        <a href="index.html" class="btn btn-primary mt-3">Voltar para Home</a>
+
+    </div>
+
+</div>
+
+<footer class="bg-dark text-light mt-auto p-4">
+    <div class="container">
+        <h4>Sobre o projeto</h4>
+        <p>Esse é um mini projeto desenvolvido para a disciplina de Desenvolvimento de Sistemas Web 1 (DSW 1).</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+<script src="assets/js/navbar.js"></script>
+
+</body>
+</html>

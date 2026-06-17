@@ -1,0 +1,17 @@
+
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <error-page>
+    <exception-type>br.edu.ifsp.exception.AcessoNegadoException</exception-type>
+    <location>/error.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+  <welcome-file-list>
+    <welcome-file>carro</welcome-file>
+  </welcome-file-list>
+</web-app>
+
