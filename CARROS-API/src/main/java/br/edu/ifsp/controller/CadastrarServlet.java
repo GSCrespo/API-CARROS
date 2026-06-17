@@ -21,7 +21,7 @@ import br.edu.ifsp.dao.CarroDAO;
 import br.edu.ifsp.model.Carro;
 
 
-@WebServlet("/cadastrarCarro")
+@WebServlet("/cadastrar")
 @MultipartConfig
 public class CadastrarServlet extends HttpServlet {
     
